@@ -1,0 +1,1 @@
+print(sorted(["".join([char for char in word if char in 'aeiou']) for word in words]))

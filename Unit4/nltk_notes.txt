@@ -1,0 +1,84 @@
+Text.
+Concordance - Search text for word
+Similar - words that are used in similar contexts to a given word
+common_contexts - list of words with the same context in a text
+dipersion_plot(list of tokens) - visual showing where each token appears in the text
+count(word) - number of occurrences of word in text
+collocations - get the collocations in the text, for example "red wine" or "United States" (2 words that are often found together)
+
+len(text) - number of tokens
+sorted(set(text)) - number of unique tokens
+len(set(text)) / len(text) - lexical richness of text
+len(text)/len(set(text)) - lexical diversity, amount of times a word appears on average
+
+
+FreqDist(text) - create a frequency distribution for the text
+fdist.most_common(50) - print 50 most common words in the frequency distribution
+fdist1.plot(50, cumulative=True) - plot occurrences of first 50 words in a graph cumulatively
+fdist.max() - max occurring word in text
+fdist[key] - number of occurrences of key
+fdist.tabulate() - show as a table
+fdist.N() - total number of samples
+
+
+bigrams(list) - a list of pairs of words that appear next to each other "The red fox" = (The, red), (red, fox)
+
+
+Corpus nltk.corpus.name - reference corpus with that name (large body of text)
+Corpus names: gutenberg, webtext, nps_chat, brown, reuters, inaugural, cmudict
+.fileids() - list of text files in corpus
+.words(file) - list of words in the file
+.raw(file) - raw file, not split into tokens
+.sents(file) - list of sentences in file
+nltk.Text(words obj) - convert corpus word list into a text
+.categories() - get a list of categories in the corpus
+.words(categories='category') - get the words in a given category
+.words(fileids=['fileId']) - words in given fileId
+
+Conditional Freq Distributions - A frequency distribution counts observable events, such as the appearance of words in a text.
+A conditional frequency distribution needs to pair each event with a condition
+
+ie: cfd = nltk.ConditionalFreqDist(
+        (genre, word)
+        for genre in brown.categories()
+        for word in brown.words(categories=genre)
+        ) - Note that this is just 1 argument with a lot of list comprehension
+
+cfd.tabulate(conditions=['English', 'German_Deutsch'], samples=range(10), cumulative=True)
+table of keys in conditions and values in samples
+
+stopwords.words('english') - a list of common used words to just filter out of stuff
+ie: [w for w in text if w.lower() not in stopwords]
+
+cmudict matches words with the ways they can be pronounced
+
+Swadesh wordlists, lists of about 200 common words in several languages
+from nltk.corpus import swadesh
+.fileids() list of file ids for language codes
+.words(lang) 'en' for english, swadesh words for given language
+
+Wordnet - Pretty much a thesaurus
+from nltk.corpus import wordnet as wn
+wn.synsets('motorcar') - synonymous words to the parameter
+synset.lemma_names() - get the result as a list rather than a __str__ call
+synset.definition() - define a word
+synset.examples() - example usages of a word in a sentence
+synset.name() - name of the word the synset is for
+synset.lemmas() - lemma objects in the synonym set
+synset.hyponyms() - children, aka more specific words (ie car might have SUV, hatchback, ambulance, etc.)
+synset.hypernyms() - parent, aka more general word (perhaps like object, or plant)
+Another important way to navigate the WordNet network is from items to their components (meronyms) or to the things they are contained in (holonyms).
+synset.part_meronyms() - things that make up the word in the synset, for example a tree has a trunk
+synset.substance_meronyms() - what makes up something, ie types of wood for a tree
+synset.member_holonyms() - what this word makes up, ie a tree makes up a forest
+wn.synset('mint.n.04) - this means the 4th noun definition of a word, v for verb
+synset.entailments() - when a verb (v) implies doing something else, aka walking implies stepping
+lemme.antonyms() - antonyms of a word
+
+word.lowest_common_hypernyms(word2) - find their soonest common ancestor, ie for right_whale and orca, whale
+synset.min_depth() - min number of parents to a root a word has
+
+
+
+
+

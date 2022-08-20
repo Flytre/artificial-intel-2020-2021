@@ -1,0 +1,4 @@
+Test set result: 9706 / 10000
+Train set result: 59654 / 60000
+Epochs: Unknown but around 30
+Network Architecture [784-300-100-10]
